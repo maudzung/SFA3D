@@ -13,7 +13,9 @@
 - [x] Support [distributed data parallel training](https://github.com/pytorch/examples/tree/master/distributed/ddp)
 - [x] Release pre-trained models 
 
-Technical details could be found [here](./Technical_details.md)
+**Technical details could be found [here](./Technical_details.md)**
+
+**A demonstration can be found [here](https://youtu.be/FI8mJIXkgX4)**
 
 ## 2. Getting Started
 ### 2.1. Requirement
@@ -49,9 +51,19 @@ python kitti_dataset.py
 
 #### 2.3.2. Inference
 
+The pre-trained model was pushed to this repo.
+
 ```
 python test.py --gpu_idx 0 --peak_thresh 0.2
 ```
+
+#### 2.3.2. Making demonstration
+
+```
+python demo_2_sides.py --gpu_idx 0 --peak_thresh 0.2
+```
+
+The data for the demostration will be automatically downloaded by executing the above command.
 
 
 #### 2.3.3. Training
@@ -95,7 +107,7 @@ Thank you!
 
 ## References
 
-[1] CenterNet: [Objects as Points paper](https://arxiv.org/abs/1904.07850), [PyTorch Implementation](https://github.com/xingyizhou/CenterNet)
+[1] CenterNet: [Objects as Points paper](https://arxiv.org/abs/1904.07850), [PyTorch Implementation](https://github.com/xingyizhou/CenterNet) <br>
 [2] RTM3D: [PyTorch Implementation](https://github.com/maudzung/RTM3D)
 
 ## Folder structure

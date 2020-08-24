@@ -1,4 +1,4 @@
-#Super Fast and Accurate 3D Object Detection based on LiDAR Point Clouds
+# Super Fast and Accurate 3D Object Detection based on LiDAR Point Clouds
 
 ---
 
@@ -39,4 +39,4 @@ center confidences are larger than 0.2.
 
 ## 5. How to expand the work
 
-You can train the model with more classes and expand the detected area by modify configurations in the [config/kitti_dataset.py]() 
+You can train the model with more classes and expand the detected area by modify configurations in the [config/kitti_dataset.py](https://github.com/maudzung/Super-Fast-Accurate-3D-Object-Detection/blob/master/src/config/kitti_config.py) 
