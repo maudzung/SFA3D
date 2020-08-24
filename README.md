@@ -15,7 +15,12 @@
 
 **Technical details could be found [here](./Technical_details.md)**
 
-**A demonstration can be found [here](https://youtu.be/FI8mJIXkgX4)**
+## Demonstration
+
+[![demo](http://img.youtube.com/vi/FI8mJIXkgX4/0.jpg)](http://www.youtube.com/watch?v=FI8mJIXkgX4)
+
+
+**[Youtube link](https://youtu.be/FI8mJIXkgX4)**
 
 ## 2. Getting Started
 ### 2.1. Requirement
