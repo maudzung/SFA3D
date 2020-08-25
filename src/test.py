@@ -40,7 +40,8 @@ def parse_test_configs():
                         help='The name using for saving logs, models,...')
     parser.add_argument('-a', '--arch', type=str, default='fpn_resnet_18', metavar='ARCH',
                         help='The name of the model architecture')
-    parser.add_argument('--pretrained_path', type=str, default='../checkpoints/fpn_resnet_18/fpn_resnet_18_epoch_300.pth', metavar='PATH',
+    parser.add_argument('--pretrained_path', type=str,
+                        default='../checkpoints/fpn_resnet_18/fpn_resnet_18_epoch_300.pth', metavar='PATH',
                         help='the path of the pretrained checkpoint')
     parser.add_argument('--K', type=int, default=50,
                         help='the number of top K')
@@ -73,6 +74,7 @@ def parse_test_configs():
     configs.down_ratio = 4
     configs.max_objects = 50
 
+    configs.imagenet_pretrained = False
     configs.head_conv = 64
     configs.num_classes = 3
     configs.num_center_offset = 2
@@ -109,6 +111,7 @@ if __name__ == '__main__':
     print('\n\n' + '-*=' * 30 + '\n\n')
     assert os.path.isfile(configs.pretrained_path), "No file at {}".format(configs.pretrained_path)
     model.load_state_dict(torch.load(configs.pretrained_path))
+    print('Loaded weights from {}\n'.format(configs.pretrained_path))
 
     configs.device = torch.device('cpu' if configs.no_cuda else 'cuda:{}'.format(configs.gpu_idx))
     model = model.to(device=configs.device)
@@ -124,7 +127,6 @@ if __name__ == '__main__':
             input_bev_maps = bev_maps.to(configs.device, non_blocking=True).float()
             t1 = time_synchronized()
             outputs = model(input_bev_maps)
-            t2 = time_synchronized()
             outputs['hm_cen'] = _sigmoid(outputs['hm_cen'])
             outputs['cen_offset'] = _sigmoid(outputs['cen_offset'])
             # detections size (batch_size, K, 10)
@@ -132,6 +134,7 @@ if __name__ == '__main__':
                                 outputs['dim'], K=configs.K)
             detections = detections.cpu().numpy().astype(np.float32)
             detections = post_processing(detections, configs.num_classes, configs.down_ratio, configs.peak_thresh)
+            t2 = time_synchronized()
 
             detections = detections[0]  # only first batch
             # Draw prediction in the image

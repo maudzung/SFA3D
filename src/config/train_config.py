@@ -124,6 +124,7 @@ def parse_train_configs():
     configs.down_ratio = 4
     configs.max_objects = 50
 
+    configs.imagenet_pretrained = True
     configs.head_conv = 64
     configs.num_classes = 3
     configs.num_center_offset = 2

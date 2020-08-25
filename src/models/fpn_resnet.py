@@ -235,10 +235,6 @@ class PoseResNet(nn.Module):
             pretrained_state_dict = model_zoo.load_url(url)
             print('=> loading pretrained model {}'.format(url))
             self.load_state_dict(pretrained_state_dict, strict=False)
-        else:
-            print('=> imagenet pretrained model dose not exist')
-            print('=> please download it first')
-            raise ValueError('imagenet pretrained model does not exist')
 
 
 resnet_spec = {18: (BasicBlock, [2, 2, 2, 2]),
@@ -248,9 +244,9 @@ resnet_spec = {18: (BasicBlock, [2, 2, 2, 2]),
                152: (Bottleneck, [3, 8, 36, 3])}
 
 
-def get_pose_net(num_layers, heads, head_conv):
+def get_pose_net(num_layers, heads, head_conv, imagenet_pretrained):
     block_class, layers = resnet_spec[num_layers]
 
     model = PoseResNet(block_class, layers, heads, head_conv=head_conv)
-    model.init_weights(num_layers, pretrained=True)
+    model.init_weights(num_layers, pretrained=imagenet_pretrained)
     return model
