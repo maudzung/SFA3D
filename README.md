@@ -1,4 +1,4 @@
-# Super Fast and Accurate 3D Object Detection based on LiDAR
+# Super Fast and Accurate 3D Object Detection based on 3D LiDAR Point Clouds
 
 [![python-image]][python-url]
 [![pytorch-image]][pytorch-url]
@@ -15,7 +15,7 @@
 
 **Technical details could be found [here](./Technical_details.md)**
 
-## Demonstration
+## Demonstration (on GTX 1080Ti)
 
 [![demo](http://img.youtube.com/vi/FI8mJIXkgX4/0.jpg)](http://www.youtube.com/watch?v=FI8mJIXkgX4)
 
@@ -62,23 +62,41 @@ The pre-trained model was pushed to this repo.
 python test.py --gpu_idx 0 --peak_thresh 0.2
 ```
 
-#### 2.3.2. Making demonstration
+#### 2.3.3. Making demonstration
 
 ```
 python demo_2_sides.py --gpu_idx 0 --peak_thresh 0.2
 ```
 
-The data for the demostration will be automatically downloaded by executing the above command.
+The data for the demonstration will be automatically downloaded by executing the above command.
 
 
-#### 2.3.3. Training
+#### 2.3.4. Training
 
-##### 2.3.3.1. Single machine, single gpu
+##### 2.3.4.1. Single machine, single gpu
 
 ```shell script
 python train.py --gpu_idx 0
 ```
 
+##### 2.3.4.2. Distributed Data Parallel Training
+- **Single machine (node), multiple GPUs**
+
+```
+python train.py --multiprocessing-distributed --world-size 1 --rank 0 --batch_size 64 --num_workers 8
+```
+
+- **Two machines (two nodes), multiple GPUs**
+
+   - _**First machine**_
+    ```
+    python train.py --dist-url 'tcp://IP_OF_NODE1:FREEPORT' --multiprocessing-distributed --world-size 2 --rank 0 --batch_size 64 --num_workers 8
+    ```
+
+   - _**Second machine**_
+    ```
+    python train.py --dist-url 'tcp://IP_OF_NODE2:FREEPORT' --multiprocessing-distributed --world-size 2 --rank 1 --batch_size 64 --num_workers 8
+    ```
 
 #### Tensorboard
 
