@@ -13,9 +13,9 @@
 - [x] Support [distributed data parallel training](https://github.com/pytorch/examples/tree/master/distributed/ddp)
 - [x] Release pre-trained models 
 
-**Technical details could be found [here](./Technical_details.md)**
+**The technical details are described [here](./Technical_details.md)**
 
-## Demonstration (on GTX 1080Ti)
+## Demonstration (on a single GTX 1080Ti)
 
 [![demo](http://img.youtube.com/vi/FI8mJIXkgX4/0.jpg)](http://www.youtube.com/watch?v=FI8mJIXkgX4)
 
@@ -131,7 +131,14 @@ Thank you!
 ## References
 
 [1] CenterNet: [Objects as Points paper](https://arxiv.org/abs/1904.07850), [PyTorch Implementation](https://github.com/xingyizhou/CenterNet) <br>
-[2] RTM3D: [PyTorch Implementation](https://github.com/maudzung/RTM3D)
+[2] RTM3D: [PyTorch Implementation](https://github.com/maudzung/RTM3D) <br>
+[3] Libra_R-CNN: [PyTorch Implementation](https://github.com/OceanPang/Libra_R-CNN)
+
+_The YOLO-based models with the same BEV maps input:_ <br>
+[4] Complex-YOLO: [v4](https://github.com/maudzung/Complex-YOLOv4-Pytorch), [v3](https://github.com/ghimiredhikura/Complex-YOLOv3), [v2](https://github.com/AI-liu/Complex-YOLO)
+
+*3D LiDAR Point pre-processing:* <br>
+[5] VoxelNet: [PyTorch Implementation](https://github.com/skyhehe123/VoxelNet-pytorch)
 
 ## Folder structure
 
