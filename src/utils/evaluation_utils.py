@@ -149,7 +149,7 @@ def post_processing(detections, num_classes=3, down_ratio=4, peak_thresh=0.2):
 
 def draw_predictions(img, detections, num_classes=3):
     for j in range(num_classes):
-        if len(detections[j] > 0):
+        if len(detections[j]) > 0:
             for det in detections[j]:
                 # (scores-0:1, x-1:2, y-2:3, z-3:4, dim-4:7, yaw-7:8)
                 _score, _x, _y, _z, _h, _w, _l, _yaw = det
@@ -161,7 +161,7 @@ def draw_predictions(img, detections, num_classes=3):
 def convert_det_to_real_values(detections, num_classes=3):
     kitti_dets = []
     for cls_id in range(num_classes):
-        if len(detections[cls_id] > 0):
+        if len(detections[cls_id]) > 0:
             for det in detections[cls_id]:
                 # (scores-0:1, x-1:2, y-2:3, z-3:4, dim-4:7, yaw-7:8)
                 _score, _x, _y, _z, _h, _w, _l, _yaw = det

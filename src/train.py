@@ -99,14 +99,14 @@ def main_worker(gpu_idx, configs):
     # load weight from a checkpoint
     if configs.pretrained_path is not None:
         assert os.path.isfile(configs.pretrained_path), "=> no checkpoint found at '{}'".format(configs.pretrained_path)
-        model.load_state_dict(torch.load(configs.pretrained_path))
+        model.load_state_dict(torch.load(configs.pretrained_path, map_location='cpu'))
         if logger is not None:
             logger.info('loaded pretrained model at {}'.format(configs.pretrained_path))
 
     # resume weights of model from a checkpoint
     if configs.resume_path is not None:
         assert os.path.isfile(configs.resume_path), "=> no checkpoint found at '{}'".format(configs.resume_path)
-        model.load_state_dict(torch.load(configs.resume_path))
+        model.load_state_dict(torch.load(configs.resume_path, map_location='cpu'))
         if logger is not None:
             logger.info('resume training model from checkpoint {}'.format(configs.resume_path))
 
