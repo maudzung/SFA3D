@@ -1,7 +1,8 @@
 # ROS Package for Super Fast Accurate 3D object detection
 
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger) Ubuntu 18.04 & ROS Melodic
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)  
+Ubuntu 18.04 & ROS Melodic
 
 ## Installation
 
