@@ -1,6 +1,9 @@
-# ROS Node for Super Fast Accurate 3D object detection
+# ROS Package for Super Fast Accurate 3D object detection
 
-# installation
+Ubuntu 18.04 & ROS Melodic
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+## Installation
 
 Clone and setup the main python package
 ```
@@ -12,13 +15,13 @@ Install dependancies for ROS packages:
 ```
 sudo apt install ros-melodic-autoware-msgs
 ```
-# Building Workspace
+## Building Workspace
 ```
 cd Super-Fast-Accurate-3D-Object-Detection/ros/
 catkin_make
 ```
 
-# Running the node
+## Running the node
 Run the node by simply after you build the workspace
 ```
 source devel/setup.bash
