@@ -20,10 +20,10 @@ import torch
 
 sys.path.append('../')
 
-from data_process.kitti_data_utils import gen_hm_radius, compute_radius, Calibration, get_filtered_lidar
-from data_process.kitti_bev_utils import makeBEVMap, drawRotatedBox, get_corners
-from data_process import transformation
-import config.kitti_config as cnf
+from SFA_3d_object_detection.data_process.kitti_data_utils import gen_hm_radius, compute_radius, Calibration, get_filtered_lidar
+from SFA_3d_object_detection.data_process.kitti_bev_utils import makeBEVMap, drawRotatedBox, get_corners
+from SFA_3d_object_detection.data_process import transformation
+import SFA_3d_object_detection.config.kitti_config as cnf
 
 
 class KittiDataset(Dataset):

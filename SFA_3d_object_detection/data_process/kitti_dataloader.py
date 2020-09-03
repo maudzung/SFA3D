@@ -16,8 +16,8 @@ import numpy as np
 
 sys.path.append('../')
 
-from data_process.kitti_dataset import KittiDataset
-from data_process.transformation import OneOf, Random_Rotation, Random_Scaling
+from SFA_3d_object_detection.data_process.kitti_dataset import KittiDataset
+from SFA_3d_object_detection.data_process.transformation import OneOf, Random_Rotation, Random_Scaling
 
 
 def create_train_dataloader(configs):

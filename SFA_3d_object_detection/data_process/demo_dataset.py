@@ -20,9 +20,9 @@ import torch
 
 sys.path.append('../')
 
-from data_process.kitti_data_utils import get_filtered_lidar
-from data_process.kitti_bev_utils import makeBEVMap
-import config.kitti_config as cnf
+from SFA_3d_object_detection.data_process.kitti_data_utils import get_filtered_lidar
+from SFA_3d_object_detection.data_process.kitti_bev_utils import makeBEVMap
+import SFA_3d_object_detection.config.kitti_config as cnf
 
 
 class Demo_KittiDataset(Dataset):

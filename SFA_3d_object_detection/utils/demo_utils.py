@@ -24,9 +24,9 @@ import cv2
 
 sys.path.append('../')
 
-from utils.misc import make_folder, time_synchronized
-from utils.evaluation_utils import decode, post_processing
-from utils.torch_utils import _sigmoid
+from SFA_3d_object_detection.utils.misc import make_folder, time_synchronized
+from SFA_3d_object_detection.utils.evaluation_utils import decode, post_processing
+from SFA_3d_object_detection.utils.torch_utils import _sigmoid
 
 
 def parse_demo_configs():

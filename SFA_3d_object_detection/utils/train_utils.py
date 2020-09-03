@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 
 sys.path.append('../')
 
-from utils.lr_scheduler import OneCyclePolicy
+from SFA_3d_object_detection.utils.lr_scheduler import OneCyclePolicy
 
 
 def create_optimizer(configs, model):

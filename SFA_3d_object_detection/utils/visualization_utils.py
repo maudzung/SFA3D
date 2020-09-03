@@ -17,7 +17,7 @@ import cv2
 
 sys.path.append('../')
 
-import config.kitti_config as cnf
+import SFA_3d_object_detection.config.kitti_config as cnf
 
 
 def roty(angle):
