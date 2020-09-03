@@ -28,3 +28,8 @@ Run the node by simply after you build the workspace
 source devel/setup.bash
 rosrun super_fast_object_detection rosInference.py
 ```
+
+### Subscriber
+Topic Name: ```points_raw```, Message Type: ```sensor_msgs/PointCloud2```
+### Publisher
+Topic Name: ```detected_objects```, Message Type: ```autoware_msgs/DetectedObjectArray```
