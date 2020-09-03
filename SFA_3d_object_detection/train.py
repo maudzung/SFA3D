@@ -27,14 +27,14 @@ from tqdm import tqdm
 
 sys.path.append('./')
 
-from data_process.kitti_dataloader import create_train_dataloader, create_val_dataloader
-from models.model_utils import create_model, make_data_parallel, get_num_parameters
-from utils.train_utils import create_optimizer, create_lr_scheduler, get_saved_state, save_checkpoint
-from utils.torch_utils import reduce_tensor, to_python_float
-from utils.misc import AverageMeter, ProgressMeter
-from utils.logger import Logger
-from config.train_config import parse_train_configs
-from losses.losses import Compute_Loss
+from SFA_3d_object_detection.data_process.kitti_dataloader import create_train_dataloader, create_val_dataloader
+from SFA_3d_object_detection.models.model_utils import create_model, make_data_parallel, get_num_parameters
+from SFA_3d_object_detection.utils.train_utils import create_optimizer, create_lr_scheduler, get_saved_state, save_checkpoint
+from SFA_3d_object_detection.utils.torch_utils import reduce_tensor, to_python_float
+from SFA_3d_object_detection.utils.misc import AverageMeter, ProgressMeter
+from SFA_3d_object_detection.utils.logger import Logger
+from SFA_3d_object_detection.config.train_config import parse_train_configs
+from SFA_3d_object_detection.losses.losses import Compute_Loss
 
 
 def main():

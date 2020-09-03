@@ -23,15 +23,15 @@ import numpy as np
 
 sys.path.append('../')
 
-from data_process.kitti_dataloader import create_test_dataloader
-from models.model_utils import create_model
-from utils.misc import make_folder, time_synchronized
-from utils.evaluation_utils import decode, post_processing, draw_predictions, convert_det_to_real_values
-from utils.torch_utils import _sigmoid
-import config.kitti_config as cnf
-from data_process.transformation import lidar_to_camera_box
-from utils.visualization_utils import merge_rgb_to_bev, show_rgb_image_with_boxes
-from data_process.kitti_data_utils import Calibration
+from SFA_3d_object_detection.data_process.kitti_dataloader import create_test_dataloader
+from SFA_3d_object_detection.models.model_utils import create_model
+from SFA_3d_object_detection.utils.misc import make_folder, time_synchronized
+from SFA_3d_object_detection.utils.evaluation_utils import decode, post_processing, draw_predictions, convert_det_to_real_values
+from SFA_3d_object_detection.utils.torch_utils import _sigmoid
+import SFA_3d_object_detection.config.kitti_config as cnf
+from SFA_3d_object_detection.data_process.transformation import lidar_to_camera_box
+from SFA_3d_object_detection.utils.visualization_utils import merge_rgb_to_bev, show_rgb_image_with_boxes
+from SFA_3d_object_detection.data_process.kitti_data_utils import Calibration
 
 
 def parse_test_configs():
