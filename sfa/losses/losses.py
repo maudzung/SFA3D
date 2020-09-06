@@ -15,7 +15,7 @@ import torch.nn.functional as F
 
 sys.path.append('../')
 
-from SFA_3d_object_detection.utils.torch_utils import to_cpu, _sigmoid
+from sfa.utils.torch_utils import to_cpu, _sigmoid
 
 
 def _gather_feat(feat, ind, mask=None):

@@ -9,7 +9,7 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'SFA_3d_object_detection'
+NAME = 'sfa'
 DESCRIPTION = 'A super fast and accurate 3d object detection from lidar points.'
 URL = 'https://github.com/maudzung/Super-Fast-Accurate-3D-Object-Detection'
 EMAIL = 'nguyenmaudung93.kstn@gmail.com'
@@ -97,9 +97,9 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=['SFA_3d_object_detection', 'SFA_3d_object_detection.config', 
-              'SFA_3d_object_detection.data_process', 'SFA_3d_object_detection.losses',
-              'SFA_3d_object_detection.utils','SFA_3d_object_detection.models'],
+    packages=['sfa', 'sfa.config',
+              'sfa.data_process', 'sfa.losses',
+              'sfa.utils','sfa.models'],
     install_requires=REQUIRED,
     extras_require=EXTRAS,
     include_package_data=True,

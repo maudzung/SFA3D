@@ -11,7 +11,7 @@ import numpy as np
 
 sys.path.append('../')
 
-import SFA_3d_object_detection.config.kitti_config as cnf
+import sfa.config.kitti_config as cnf
 
 
 def makeBEVMap(PointCloud_, boundary):

@@ -16,7 +16,7 @@ import cv2
 
 sys.path.append('../')
 
-import SFA_3d_object_detection.config.kitti_config as cnf
+import sfa.config.kitti_config as cnf
 
 
 class Object3d(object):

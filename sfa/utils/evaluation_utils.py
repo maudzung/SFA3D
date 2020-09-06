@@ -18,8 +18,8 @@ import torch.nn.functional as F
 import cv2
 
 sys.path.append('../')
-import SFA_3d_object_detection.config.kitti_config as cnf
-from SFA_3d_object_detection.data_process.kitti_bev_utils import drawRotatedBox
+import sfa.config.kitti_config as cnf
+from sfa.data_process.kitti_bev_utils import drawRotatedBox
 
 
 def _nms(heat, kernel=3):

@@ -14,7 +14,7 @@ import torch
 
 sys.path.append('../')
 
-from SFA_3d_object_detection.models import resnet, fpn_resnet
+from sfa.models import resnet, fpn_resnet
 
 
 def create_model(configs):

@@ -12,7 +12,7 @@ import torch
 
 sys.path.append('../')
 
-from SFA_3d_object_detection.config import kitti_config as cnf
+from sfa.config import kitti_config as cnf
 
 
 def angle_in_limit(angle):
