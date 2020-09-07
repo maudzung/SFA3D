@@ -15,6 +15,8 @@
 
 **The technical details are described [here](./Technical_details.md)**
 
+**Update 2020.09.06**: Add `ROS` node. The great work has been done by @AhmedARadwan. The instructions for using the ROS code could be found [here](https://github.com/maudzung/Super-Fast-Accurate-3D-Object-Detection/blob/master/ros/src/super_fast_object_detection/README.md)
+
 ## Demonstration (on a single GTX 1080Ti)
 
 [![demo](http://img.youtube.com/vi/FI8mJIXkgX4/0.jpg)](http://www.youtube.com/watch?v=FI8mJIXkgX4)
@@ -26,7 +28,9 @@
 ### 2.1. Requirement
 
 ```shell script
-pip install -U -r requirements.txt
+git clone https://github.com/maudzung/Super-Fast-Accurate-3D-Object-Detection.git SFA3D
+cd SFA3D/
+pip install .
 ```
 
 ### 2.2. Data Preparation
@@ -49,7 +53,7 @@ Please make sure that you construct the source code & dataset directories struct
 To visualize 3D point clouds with 3D boxes, let's execute:
 
 ```shell script
-cd src/data_process
+cd sfa/data_process/
 python kitti_dataset.py
 ```
 
@@ -163,7 +167,7 @@ ${ROOT}
         │   ├── calib/
         │   └── velodyne/
         └── classes_names.txt
-└── src/
+└── sfa/
     ├── config/
     │   ├── train_config.py
     │   └── kitti_config.py
@@ -187,6 +191,7 @@ ${ROOT}
     ├── demo_front.py
     ├── test.py
     └── train.py
+└── ros/
 ├── README.md 
 └── requirements.txt
 ```
