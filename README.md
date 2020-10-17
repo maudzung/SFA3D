@@ -15,7 +15,8 @@
 
 **The technical details are described [here](./Technical_details.md)**
 
-**Update 2020.09.06**: Add `ROS` node. The great work has been done by @AhmedARadwan. The instructions for using the ROS code could be found [here](https://github.com/maudzung/Super-Fast-Accurate-3D-Object-Detection/blob/master/ros/src/super_fast_object_detection/README.md)
+**Update 2020.09.06**: Add `ROS` source code. The great work has been done by [@AhmedARadwan](https://github.com/AhmedARadwan). 
+The implementation is [here]()
 
 ## Demonstration (on a single GTX 1080Ti)
 
@@ -27,8 +28,10 @@
 ## 2. Getting Started
 ### 2.1. Requirement
 
+The instructions for setting up a virtual environment is [here](https://github.com/maudzung/virtual_environment_python3).
+
 ```shell script
-git clone https://github.com/maudzung/Super-Fast-Accurate-3D-Object-Detection.git SFA3D
+git clone https://github.com/maudzung/SFA3D.git SFA3D
 cd SFA3D/
 pip install .
 ```
@@ -191,7 +194,6 @@ ${ROOT}
     ├── demo_front.py
     ├── test.py
     └── train.py
-└── ros/
 ├── README.md 
 └── requirements.txt
 ```
