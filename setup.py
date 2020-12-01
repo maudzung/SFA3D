@@ -26,6 +26,7 @@ REQUIRED = [
 
 # What packages are optional?
 EXTRAS = {
+    'tqdm==4.54.0', 'matplotlib=3.3.3'
     # 'fancy feature': ['django'],
 }
 
