@@ -21,7 +21,7 @@ import cv2
 import torch
 import numpy as np
 
-sys.path.append('./')
+sys.path.append('../')
 
 from sfa.data_process.demo_dataset import Demo_KittiDataset
 from sfa.models.model_utils import create_model

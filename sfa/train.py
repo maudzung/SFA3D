@@ -25,7 +25,7 @@ import torch.multiprocessing as mp
 import torch.utils.data.distributed
 from tqdm import tqdm
 
-sys.path.append('./')
+sys.path.append('../')
 
 from sfa.data_process.kitti_dataloader import create_train_dataloader, create_val_dataloader
 from sfa.models.model_utils import create_model, make_data_parallel, get_num_parameters
