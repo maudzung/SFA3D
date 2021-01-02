@@ -6,6 +6,7 @@
 # Modified by Nguyen Mau Dung (2020.08.09)
 # ------------------------------------------------------------------------------
 
+import os
 import sys
 import math
 
@@ -13,9 +14,13 @@ import torch.nn as nn
 import torch
 import torch.nn.functional as F
 
-sys.path.append('../')
+src_dir = os.path.dirname(os.path.realpath(__file__))
+while not src_dir.endswith("sfa"):
+    src_dir = os.path.dirname(src_dir)
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
-from sfa.utils.torch_utils import to_cpu, _sigmoid
+from utils.torch_utils import to_cpu, _sigmoid
 
 
 def _gather_feat(feat, ind, mask=None):

@@ -10,6 +10,7 @@
 """
 
 from __future__ import division
+import os
 import sys
 
 import torch
@@ -17,9 +18,14 @@ import numpy as np
 import torch.nn.functional as F
 import cv2
 
-sys.path.append('../')
-import sfa.config.kitti_config as cnf
-from sfa.data_process.kitti_bev_utils import drawRotatedBox
+src_dir = os.path.dirname(os.path.realpath(__file__))
+while not src_dir.endswith("sfa"):
+    src_dir = os.path.dirname(src_dir)
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
+
+import config.kitti_config as cnf
+from data_process.kitti_bev_utils import drawRotatedBox
 
 
 def _nms(heat, kernel=3):
@@ -54,11 +60,11 @@ def _topk(scores, K=40):
     topk_scores, topk_inds = torch.topk(scores.view(batch, cat, -1), K)
 
     topk_inds = topk_inds % (height * width)
-    topk_ys = (topk_inds / width).int().float()
+    topk_ys = (torch.floor_divide(topk_inds, width)).float()
     topk_xs = (topk_inds % width).int().float()
 
     topk_score, topk_ind = torch.topk(topk_scores.view(batch, -1), K)
-    topk_clses = (topk_ind / K).int()
+    topk_clses = (torch.floor_divide(topk_ind, K)).int()
     topk_inds = _gather_feat(topk_inds.view(batch, -1, 1), topk_ind).view(batch, K)
     topk_ys = _gather_feat(topk_ys.view(batch, -1, 1), topk_ind).view(batch, K)
     topk_xs = _gather_feat(topk_xs.view(batch, -1, 1), topk_ind).view(batch, K)

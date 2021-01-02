@@ -25,16 +25,20 @@ import torch.multiprocessing as mp
 import torch.utils.data.distributed
 from tqdm import tqdm
 
-sys.path.append('./')
+src_dir = os.path.dirname(os.path.realpath(__file__))
+while not src_dir.endswith("sfa"):
+    src_dir = os.path.dirname(src_dir)
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
-from sfa.data_process.kitti_dataloader import create_train_dataloader, create_val_dataloader
-from sfa.models.model_utils import create_model, make_data_parallel, get_num_parameters
-from sfa.utils.train_utils import create_optimizer, create_lr_scheduler, get_saved_state, save_checkpoint
-from sfa.utils.torch_utils import reduce_tensor, to_python_float
-from sfa.utils.misc import AverageMeter, ProgressMeter
-from sfa.utils.logger import Logger
-from sfa.config.train_config import parse_train_configs
-from sfa.losses.losses import Compute_Loss
+from data_process.kitti_dataloader import create_train_dataloader, create_val_dataloader
+from models.model_utils import create_model, make_data_parallel, get_num_parameters
+from utils.train_utils import create_optimizer, create_lr_scheduler, get_saved_state, save_checkpoint
+from utils.torch_utils import reduce_tensor, to_python_float
+from utils.misc import AverageMeter, ProgressMeter
+from utils.logger import Logger
+from config.train_config import parse_train_configs
+from losses.losses import Compute_Loss
 
 
 def main():

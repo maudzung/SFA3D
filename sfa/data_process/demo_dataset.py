@@ -18,11 +18,15 @@ from torch.utils.data import Dataset
 import cv2
 import torch
 
-sys.path.append('../')
+src_dir = os.path.dirname(os.path.realpath(__file__))
+while not src_dir.endswith("sfa"):
+    src_dir = os.path.dirname(src_dir)
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
-from sfa.data_process.kitti_data_utils import get_filtered_lidar
-from sfa.data_process.kitti_bev_utils import makeBEVMap
-import sfa.config.kitti_config as cnf
+from data_process.kitti_data_utils import get_filtered_lidar
+from data_process.kitti_bev_utils import makeBEVMap
+import config.kitti_config as cnf
 
 
 class Demo_KittiDataset(Dataset):

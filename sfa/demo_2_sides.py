@@ -18,16 +18,20 @@ import cv2
 import torch
 import numpy as np
 
-sys.path.append('./')
+src_dir = os.path.dirname(os.path.realpath(__file__))
+while not src_dir.endswith("sfa"):
+    src_dir = os.path.dirname(src_dir)
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
-from sfa.data_process.demo_dataset import Demo_KittiDataset
-from sfa.models.model_utils import create_model
-from sfa.utils.evaluation_utils import draw_predictions, convert_det_to_real_values
-import sfa.config.kitti_config as cnf
-from sfa.data_process.transformation import lidar_to_camera_box
-from sfa.utils.visualization_utils import show_rgb_image_with_boxes
-from sfa.data_process.kitti_data_utils import Calibration
-from sfa.utils.demo_utils import parse_demo_configs, do_detect, download_and_unzip, write_credit
+from data_process.demo_dataset import Demo_KittiDataset
+from models.model_utils import create_model
+from utils.evaluation_utils import draw_predictions, convert_det_to_real_values
+import config.kitti_config as cnf
+from data_process.transformation import lidar_to_camera_box
+from utils.visualization_utils import show_rgb_image_with_boxes
+from data_process.kitti_data_utils import Calibration
+from utils.demo_utils import parse_demo_configs, do_detect, download_and_unzip, write_credit
 
 if __name__ == '__main__':
     configs = parse_demo_configs()

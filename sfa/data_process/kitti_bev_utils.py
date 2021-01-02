@@ -4,14 +4,19 @@
 """
 
 import math
+import os
 import sys
 
 import cv2
 import numpy as np
 
-sys.path.append('../')
+src_dir = os.path.dirname(os.path.realpath(__file__))
+while not src_dir.endswith("sfa"):
+    src_dir = os.path.dirname(src_dir)
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
-import sfa.config.kitti_config as cnf
+import config.kitti_config as cnf
 
 
 def makeBEVMap(PointCloud_, boundary):

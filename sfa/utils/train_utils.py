@@ -17,9 +17,13 @@ import torch
 from torch.optim.lr_scheduler import LambdaLR
 import matplotlib.pyplot as plt
 
-sys.path.append('../')
+src_dir = os.path.dirname(os.path.realpath(__file__))
+while not src_dir.endswith("sfa"):
+    src_dir = os.path.dirname(src_dir)
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
-from sfa.utils.lr_scheduler import OneCyclePolicy
+from utils.lr_scheduler import OneCyclePolicy
 
 
 def create_optimizer(configs, model):

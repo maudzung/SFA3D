@@ -8,16 +8,21 @@
 # Description: This script for creating the dataloader for training/validation/test phase
 """
 
+import os
 import sys
 
 import torch
 from torch.utils.data import DataLoader
 import numpy as np
 
-sys.path.append('../')
+src_dir = os.path.dirname(os.path.realpath(__file__))
+while not src_dir.endswith("sfa"):
+    src_dir = os.path.dirname(src_dir)
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
-from sfa.data_process.kitti_dataset import KittiDataset
-from sfa.data_process.transformation import OneOf, Random_Rotation, Random_Scaling
+from data_process.kitti_dataset import KittiDataset
+from data_process.transformation import OneOf, Random_Rotation, Random_Scaling
 
 
 def create_train_dataloader(configs):

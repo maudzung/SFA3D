@@ -9,14 +9,19 @@
 """
 
 from __future__ import print_function
+import os
 import sys
 
 import numpy as np
 import cv2
 
-sys.path.append('../')
+src_dir = os.path.dirname(os.path.realpath(__file__))
+while not src_dir.endswith("sfa"):
+    src_dir = os.path.dirname(src_dir)
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
-import sfa.config.kitti_config as cnf
+import config.kitti_config as cnf
 
 
 class Object3d(object):

@@ -22,11 +22,15 @@ import wget
 import torch
 import cv2
 
-sys.path.append('../')
+src_dir = os.path.dirname(os.path.realpath(__file__))
+while not src_dir.endswith("sfa"):
+    src_dir = os.path.dirname(src_dir)
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
-from sfa.utils.misc import make_folder, time_synchronized
-from sfa.utils.evaluation_utils import decode, post_processing
-from sfa.utils.torch_utils import _sigmoid
+from utils.misc import make_folder, time_synchronized
+from utils.evaluation_utils import decode, post_processing
+from utils.torch_utils import _sigmoid
 
 
 def parse_demo_configs():

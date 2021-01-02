@@ -8,13 +8,18 @@
 # Description: utils functions that use for model
 """
 
+import os
 import sys
 
 import torch
 
-sys.path.append('../')
+src_dir = os.path.dirname(os.path.realpath(__file__))
+while not src_dir.endswith("sfa"):
+    src_dir = os.path.dirname(src_dir)
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
-from sfa.models import resnet, fpn_resnet
+from models import resnet, fpn_resnet
 
 
 def create_model(configs):

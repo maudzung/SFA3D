@@ -4,15 +4,20 @@
 # Refer: https://github.com/ghimiredhikura/Complex-YOLOv3
 # Source : https://github.com/jeasinema/VoxelNet-tensorflow/blob/master/utils/utils.py
 """
+import os
 import sys
 import math
 
 import numpy as np
 import torch
 
-sys.path.append('../')
+src_dir = os.path.dirname(os.path.realpath(__file__))
+while not src_dir.endswith("sfa"):
+    src_dir = os.path.dirname(src_dir)
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
 
-from sfa.config import kitti_config as cnf
+from config import kitti_config as cnf
 
 
 def angle_in_limit(angle):
