@@ -33,7 +33,7 @@ The instructions for setting up a virtual environment is [here](https://github.c
 ```shell script
 git clone https://github.com/maudzung/SFA3D.git SFA3D
 cd SFA3D/
-pip install .
+pip install -r requirements.txt
 ```
 
 ### 2.2. Data Preparation
