@@ -19,10 +19,19 @@ import torch.nn.functional as F
 import cv2
 
 src_dir = os.path.dirname(os.path.realpath(__file__))
+if src_dir not in sys.path:
+    sys.path.append(src_dir)
+
 while not src_dir.endswith("sfa"):
     src_dir = os.path.dirname(src_dir)
 if src_dir not in sys.path:
     sys.path.append(src_dir)
+
+from tqdm import tqdm
+from data_process.transformation import lidar_to_camera_box
+import kitti_common
+import box_np_ops
+
 
 import config.kitti_config as cnf
 from data_process.kitti_bev_utils import drawRotatedBox
@@ -163,8 +172,7 @@ def draw_predictions(img, detections, num_classes=3):
 
     return img
 
-
-def convert_det_to_real_values(detections, num_classes=3):
+def convert_det_to_real_values(detections, num_classes=3, add_score=False):
     kitti_dets = []
     for cls_id in range(num_classes):
         if len(detections[cls_id]) > 0:
@@ -177,7 +185,68 @@ def convert_det_to_real_values(detections, num_classes=3):
                 z = _z + cnf.boundary['minZ']
                 w = _w / cnf.BEV_WIDTH * cnf.bound_size_y
                 l = _l / cnf.BEV_HEIGHT * cnf.bound_size_x
-
-                kitti_dets.append([cls_id, x, y, z, _h, w, l, _yaw])
+                if not add_score:
+                    kitti_dets.append([cls_id, x, y, z, _h, w, l, _yaw])                    
+                else:
+                    kitti_dets.append([cls_id, x, y, z, _h, w, l, _yaw, _score])
 
     return np.array(kitti_dets)
+
+def convert_detection_to_kitti_annos(detection, dataset):
+    print("Convert detection results to kitti format")
+    class_names = ['Pedestrian', 'Car', 'Cyclist' ]
+    annos = []
+    assert len(dataset.sample_id_list) == len(detection)
+    for i in tqdm(range(len(dataset.sample_id_list))):
+
+        calib =  dataset.get_calib(dataset.sample_id_list[i])
+        _, img = dataset.get_image(dataset.sample_id_list[i])
+        
+        kitti_lidar_dets = convert_det_to_real_values(detection[i],add_score=True)
+        kitti_dets = np.array(kitti_lidar_dets)
+
+        if len(kitti_dets) > 0:
+            kitti_dets[:, 1:-1] = lidar_to_camera_box(kitti_lidar_dets[:, 1:-1], calib.V2C, calib.R0, calib.P2)
+            locs = kitti_dets[:, 1:4]
+            dims = kitti_dets[:, [6,4,5]]
+            angles = kitti_dets[:, -2]
+            camera_box_origin = [0.5, 1.0, 0.5]
+            box_corners = box_np_ops.center_to_corner_box3d(
+                locs, dims, angles, camera_box_origin, axis=1)
+            box_corners_in_image = box_np_ops.project_to_image(
+                box_corners, calib.P2)
+            # box_corners_in_image: [N, 8, 2]
+            minxy = np.min(box_corners_in_image, axis=1)
+            maxxy = np.max(box_corners_in_image, axis=1)
+            bbox = np.concatenate([minxy, maxxy], axis=1)
+
+
+        anno = kitti_common.get_start_result_anno()
+        num_example = 0
+        for idx in range(kitti_dets.shape[0]):
+            
+            image_shape = img.shape[:2]
+            if bbox[idx, 0] > image_shape[1] or bbox[idx, 1] > image_shape[0]:
+                continue
+            if bbox[idx, 2] < 0 or bbox[idx, 3] < 0:
+                continue
+            bbox[idx, 2:] = np.minimum(bbox[idx, 2:], image_shape[::-1])
+            bbox[idx, :2] = np.maximum(bbox[idx, :2], [0, 0])            
+  
+            anno["bbox"].append(bbox[idx])
+            anno["alpha"].append(-np.arctan2(-kitti_lidar_dets[idx, 3], kitti_lidar_dets[idx, 2])+kitti_dets[idx,-2])
+            anno["dimensions"].append(kitti_dets[idx, [6,4,5]])
+            anno["location"].append(kitti_dets[idx, 1:4])
+            anno["rotation_y"].append(kitti_dets[idx,-2])
+
+            anno["name"].append(class_names[int(kitti_dets[idx,0])])
+            anno["truncated"].append(0.0)
+            anno["occluded"].append(0)
+            anno["score"].append(kitti_lidar_dets[idx,-1])
+            num_example += 1
+        if num_example != 0:
+            anno = {n: np.stack(v) for n, v in anno.items()}
+            annos.append(anno)
+        else:
+            annos.append(kitti_common.empty_result_anno())       
+    return annos
