@@ -84,4 +84,8 @@ def drawRotatedBox(img, x, y, w, l, yaw, color):
     corners_int = bev_corners.reshape(-1, 1, 2).astype(int)
     cv2.polylines(img, [corners_int], True, color, 2)
     corners_int = bev_corners.reshape(-1, 2)
-    cv2.line(img, (corners_int[0, 0], corners_int[0, 1]), (corners_int[3, 0], corners_int[3, 1]), (255, 255, 0), 2)
+    #import pdb; pdb.set_trace()
+    # cv2.line(img, (corners_int[0, 0], corners_int[0, 1]), (corners_int[3, 0], corners_int[3, 1]), (255, 255, 0), 2)
+    # corners_int[0, 0] value cmng as a decimal 234.52762, but we need integer. So converting into integer.
+    #https://www.geeksforgeeks.org/python-opencv-cv2-line-method/?ref=lbp
+    cv2.line(img, (int(corners_int[0, 0]), int(corners_int[0, 1])), (int(corners_int[3, 0]), int(corners_int[3, 1])), (255, 255, 0), 2)

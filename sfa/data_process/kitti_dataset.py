@@ -17,6 +17,7 @@ import numpy as np
 from torch.utils.data import Dataset
 import cv2
 import torch
+import pdb
 
 src_dir = os.path.dirname(os.path.realpath(__file__))
 while not src_dir.endswith("sfa"):
@@ -117,6 +118,7 @@ class KittiDataset(Dataset):
 
     def get_image(self, idx):
         img_path = os.path.join(self.image_dir, '{:06d}.png'.format(idx))
+        #pdb.set_trace()
         img = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB)
 
         return img_path, img
@@ -296,6 +298,7 @@ if __name__ == '__main__':
     dataset = KittiDataset(configs, mode='val', lidar_aug=lidar_aug, hflip_prob=0., num_samples=configs.num_samples)
 
     print('\n\nPress n to see the next sample >>> Press Esc to quit...')
+    #import pdb; pdb.set_trace() 
     for idx in range(len(dataset)):
         bev_map, labels, img_rgb, img_path = dataset.draw_img_with_label(idx)
         calib = Calibration(img_path.replace(".png", ".txt").replace("image_2", "calib"))
