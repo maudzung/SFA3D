@@ -41,9 +41,9 @@ def parse_train_configs():
                         help='If true, dont evaluate the model on the val set')
     parser.add_argument('--num_samples', type=int, default=None,
                         help='Take a subset of the dataset to run and debug')
-    parser.add_argument('--num_workers', type=int, default=4,
+    parser.add_argument('--num_workers', type=int, default=1,
                         help='Number of threads for loading data')
-    parser.add_argument('--batch_size', type=int, default=16,
+    parser.add_argument('--batch_size', type=int, default=4,
                         help='mini-batch size (default: 16), this is the total'
                              'batch size of all GPUs on the current node when using'
                              'Data Parallel or Distributed Data Parallel')
@@ -59,7 +59,7 @@ def parse_train_configs():
 
     parser.add_argument('--start_epoch', type=int, default=1, metavar='N',
                         help='the starting epoch')
-    parser.add_argument('--num_epochs', type=int, default=300, metavar='N',
+    parser.add_argument('--num_epochs', type=int, default=2, metavar='N',
                         help='number of total epochs to run')
     parser.add_argument('--lr_type', type=str, default='cosin',
                         help='the type of learning rate scheduler (cosin or multi_step or one_cycle)')
