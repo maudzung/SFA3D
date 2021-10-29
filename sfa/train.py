@@ -1,12 +1,8 @@
 """
-# -*- coding: utf-8 -*-
------------------------------------------------------------------------------------
-# Author: Nguyen Mau Dung
-# DoC: 2020.08.17
-# email: nguyenmaudung93.kstn@gmail.com
------------------------------------------------------------------------------------
-# Description: This script for training
-
+# Name : Raviteja Tirumalapudi, Rajay Vedraj I.S
+# Lab : Autonomous vehicles lab
+# University : VIT,Vellore, India
+# Email :  raviteja.research@gmail.com
 """
 
 import time
