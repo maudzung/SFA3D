@@ -85,7 +85,7 @@ class KittiDataset(Dataset):
     def load_img_with_targets(self, index):
         """Load images and targets for the training and validation phase"""
         sample_id = int(self.sample_id_list[index])
-        img_path = os.path.join(self.image_dir, '{:06d}.png'.format(sample_id))
+        img_path = os.path.join(self.image_dir, '{:06d}.jpg'.format(sample_id))
         lidarData = self.get_lidar(sample_id)
         calib = self.get_calib(sample_id)
         labels, has_labels = self.get_label(sample_id)
@@ -116,7 +116,7 @@ class KittiDataset(Dataset):
         return metadatas, bev_map, targets
 
     def get_image(self, idx):
-        img_path = os.path.join(self.image_dir, '{:06d}.png'.format(idx))
+        img_path = os.path.join(self.image_dir, '{:06d}.jpg'.format(idx))
         img = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB)
 
         return img_path, img
@@ -298,7 +298,7 @@ if __name__ == '__main__':
     print('\n\nPress n to see the next sample >>> Press Esc to quit...')
     for idx in range(len(dataset)):
         bev_map, labels, img_rgb, img_path = dataset.draw_img_with_label(idx)
-        calib = Calibration(img_path.replace(".png", ".txt").replace("image_2", "calib"))
+        calib = Calibration(img_path.replace(".jpg", ".txt").replace("image_2", "calib"))
         bev_map = (bev_map.transpose(1, 2, 0) * 255).astype(np.uint8)
         bev_map = cv2.resize(bev_map, (cnf.BEV_HEIGHT, cnf.BEV_WIDTH))
 
