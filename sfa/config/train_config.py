@@ -131,6 +131,7 @@ def parse_train_configs():
     configs.num_z = 1
     configs.num_dim = 3
     configs.num_direction = 2  # sin, cos
+    configs.evaluate = True
 
     configs.heads = {
         'hm_cen': configs.num_classes,
@@ -145,7 +146,7 @@ def parse_train_configs():
     ####################################################################
     ############## Dataset, logs, Checkpoints dir ######################
     ####################################################################
-    configs.dataset_dir = os.path.join(configs.root_dir, 'dataset', 'kitti')
+    configs.dataset_dir = os.path.join('../../', 'dataset')
     configs.checkpoints_dir = os.path.join(configs.root_dir, 'checkpoints', configs.saved_fn)
     configs.logs_dir = os.path.join(configs.root_dir, 'logs', configs.saved_fn)
 

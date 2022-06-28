@@ -99,7 +99,8 @@ def parse_test_configs():
     ##############Dataset, Checkpoints, and results dir configs#########
     ####################################################################
     configs.root_dir = '../'
-    configs.dataset_dir = os.path.join(configs.root_dir, 'dataset', 'kitti')
+    # configs.dataset_dir = os.path.join(configs.root_dir, 'dataset', 'kitti')
+    configs.dataset_dir = os.path.join('../../', 'dataset')
 
     if configs.save_test_output:
         configs.results_dir = os.path.join(configs.root_dir, 'results', configs.saved_fn)
@@ -118,6 +119,7 @@ if __name__ == '__main__':
     print('Loaded weights from {}\n'.format(configs.pretrained_path))
 
     configs.device = torch.device('cpu' if configs.no_cuda else 'cuda:{}'.format(configs.gpu_idx))
+    print(configs.device)
     model = model.to(device=configs.device)
 
     out_cap = None
@@ -153,7 +155,7 @@ if __name__ == '__main__':
             img_rgb = img_rgbs[0].numpy()
             img_rgb = cv2.resize(img_rgb, (img_rgb.shape[1], img_rgb.shape[0]))
             img_bgr = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2BGR)
-            calib = Calibration(img_path.replace(".png", ".txt").replace("image_2", "calib"))
+            calib = Calibration(img_path.replace(".jpg", ".txt").replace("image_2", "calib"))
             kitti_dets = convert_det_to_real_values(detections)
             if len(kitti_dets) > 0:
                 kitti_dets[:, 1:] = lidar_to_camera_box(kitti_dets[:, 1:], calib.V2C, calib.R0, calib.P2)
@@ -179,10 +181,10 @@ if __name__ == '__main__':
                 else:
                     raise TypeError
 
-            cv2.imshow('test-img', out_img)
-            print('\n[INFO] Press n to see the next sample >>> Press Esc to quit...\n')
-            if cv2.waitKey(0) & 0xFF == 27:
-                break
+            # cv2.imshow('test-img', out_img)
+            # print('\n[INFO] Press n to see the next sample >>> Press Esc to quit...\n')
+            # if cv2.waitKey(0) & 0xFF == 27:
+            #     break
     if out_cap:
         out_cap.release()
     cv2.destroyAllWindows()

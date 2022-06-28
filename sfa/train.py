@@ -1,14 +1,3 @@
-"""
-# -*- coding: utf-8 -*-
------------------------------------------------------------------------------------
-# Author: Nguyen Mau Dung
-# DoC: 2020.08.17
-# email: nguyenmaudung93.kstn@gmail.com
------------------------------------------------------------------------------------
-# Description: This script for training
-
-"""
-
 import time
 import numpy as np
 import sys
@@ -40,6 +29,10 @@ from utils.logger import Logger
 from config.train_config import parse_train_configs
 from losses.losses import Compute_Loss
 
+from utils.torch_utils import _sigmoid
+from utils.evaluation_utils import decode, post_processing, draw_predictions, convert_det_to_real_values, convert_detection_to_kitti_annos
+from utils import kitti_common
+from utils.eval import get_official_eval_result
 
 def main():
     configs = parse_train_configs()
@@ -250,8 +243,9 @@ def train_one_epoch(train_dataloader, model, optimizer, lr_scheduler, epoch, con
 def validate(val_dataloader, model, configs):
     losses = AverageMeter('Loss', ':.4e')
     criterion = Compute_Loss(device=configs.device)
-    # switch to train mode
+
     model.eval()
+    detections_list = []
     with torch.no_grad():
         for batch_idx, batch_data in enumerate(tqdm(val_dataloader)):
             metadatas, imgs, targets = batch_data
@@ -270,6 +264,23 @@ def validate(val_dataloader, model, configs):
             else:
                 reduced_loss = total_loss.data
             losses.update(to_python_float(reduced_loss), batch_size)
+            outputs['hm_cen'] = _sigmoid(outputs['hm_cen'])
+            outputs['cen_offset'] = _sigmoid(outputs['cen_offset'])            
+
+      
+            for idx in range(outputs['hm_cen'].shape[0]):
+                # detections size (batch_size, K, 10)
+                detections = decode(outputs['hm_cen'][idx:idx+1,:], outputs['cen_offset'][idx:idx+1,:],
+                                    outputs['direction'][idx:idx+1,:], outputs['z_coor'][idx:idx+1,:],
+                                    outputs['dim'][idx:idx+1,:], K=configs.K)
+                detections = detections.cpu().numpy().astype(np.float32)
+                detections = post_processing(detections, configs.num_classes, configs.down_ratio)               
+                detections_list.append(detections[0])
+
+        dt_annos = convert_detection_to_kitti_annos(detections_list, val_dataloader.dataset)
+        gt_annos = kitti_common.get_label_annos(val_dataloader.dataset.label_dir, val_dataloader.dataset.sample_id_list)
+        print("Doing evaluation")
+        print(get_official_eval_result(gt_annos, dt_annos, [i for i in range(configs.num_classes)])) 
 
     return losses.avg
 
