@@ -10,3 +10,6 @@ wget==3.2
 tqdm==4.54.0
 matplotlib==3.3.3
 numba
+onnx==1.7.0
+onnxruntime==1.7.0
+onnx-simplifier
