@@ -45,7 +45,7 @@ def parse_test_configs():
     parser.add_argument('-a', '--arch', type=str, default='fpn_resnet_18', metavar='ARCH',
                         help='The name of the model architecture')
     parser.add_argument('--pretrained_path', type=str,
-                        default='../checkpoints/fpn_resnet_18/fpn_resnet_18_epoch_300.pth', metavar='PATH',
+                        default='../checkpoints/fpn_resnet_18/Model_fpn_resnet_18_epoch_200.pth', metavar='PATH',
                         help='the path of the pretrained checkpoint')
     parser.add_argument('--K', type=int, default=50,
                         help='the number of top K')
@@ -127,12 +127,14 @@ if __name__ == '__main__':
     model.eval()
 
     test_dataloader = create_test_dataloader(configs)
+    times = []
     with torch.no_grad():
         for batch_idx, batch_data in enumerate(test_dataloader):
             metadatas, bev_maps, img_rgbs = batch_data
             input_bev_maps = bev_maps.to(configs.device, non_blocking=True).float()
             t1 = time_synchronized()
             outputs = model(input_bev_maps)
+            t2 = time_synchronized()
             outputs['hm_cen'] = _sigmoid(outputs['hm_cen'])
             outputs['cen_offset'] = _sigmoid(outputs['cen_offset'])
             # detections size (batch_size, K, 10)
@@ -140,7 +142,7 @@ if __name__ == '__main__':
                                 outputs['dim'], K=configs.K)
             detections = detections.cpu().numpy().astype(np.float32)
             detections = post_processing(detections, configs.num_classes, configs.down_ratio, configs.peak_thresh)
-            t2 = time_synchronized()
+            # t2 = time_synchronized()
 
             detections = detections[0]  # only first batch
             # Draw prediction in the image
@@ -165,6 +167,7 @@ if __name__ == '__main__':
 
             print('\tDone testing the {}th sample, time: {:.1f}ms, speed {:.2f}FPS'.format(batch_idx, (t2 - t1) * 1000,
                                                                                            1 / (t2 - t1)))
+            times.append(t2 - t1)
             if configs.save_test_output:
                 if configs.output_format == 'image':
                     img_fn = os.path.basename(metadatas['img_path'][0])[:-4]
@@ -181,10 +184,12 @@ if __name__ == '__main__':
                 else:
                     raise TypeError
 
-            # cv2.imshow('test-img', out_img)
-            # print('\n[INFO] Press n to see the next sample >>> Press Esc to quit...\n')
-            # if cv2.waitKey(0) & 0xFF == 27:
-            #     break
+            cv2.imshow('test-img', out_img)
+            print('\n[INFO] Press n to see the next sample >>> Press Esc to quit...\n')
+            if cv2.waitKey(0) & 0xFF == 27:
+                break
+    times = np.array(times)
+    print(f"average time: {np.average(times)*1000} ms, speed: {1 / np.average(times)}")
     if out_cap:
         out_cap.release()
     cv2.destroyAllWindows()
