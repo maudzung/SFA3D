@@ -1,4 +1,4 @@
-# Super Fast and Accurate 3D Object Detection based on 3D LiDAR Point Clouds
+# Super Fast and Accurate 3D Object Detection based on 3D LiDAR Point Clouds (SFA3D)
 
 [![python-image]][python-url]
 [![pytorch-image]][pytorch-url]
@@ -13,7 +13,10 @@
 - [x] Support [distributed data parallel training](https://github.com/pytorch/examples/tree/master/distributed/ddp)
 - [x] Release pre-trained models 
 
-**The technical details are described [here](./Technical_details.md)**
+## Highlights
+- [x] The technical details are described **[here](./Technical_details.md)**
+- [x] The great introduction and explanation from _`Computer Vision and Perception for Self-Driving Cars Course`_ **[Youtube link](https://youtu.be/cPOtULagNnI?t=4858)**
+- [x] SFA3D is used for the second course in the _`Udacity Self-Driving Car Engineer Nanodegree Program: Sensor Fusion and Tracking`_ **[GitHub link](https://github.com/udacity/nd013-c2-fusion-starter/tree/b1455b8ff433cb7f537d62e526209738293e7d8b)**
 
 **Update 2020.09.06**: Add `ROS` source code. The great work has been done by [@AhmedARadwan](https://github.com/AhmedARadwan). 
 The implementation is [here](https://github.com/maudzung/SFA3D/tree/ea0222c1b35489dc35d8452c989c4b014e20e0da)
