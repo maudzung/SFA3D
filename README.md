@@ -107,6 +107,45 @@ python train.py --multiprocessing-distributed --world-size 1 --rank 0 --batch_si
     ```
     python train.py --dist-url 'tcp://IP_OF_NODE2:FREEPORT' --multiprocessing-distributed --world-size 2 --rank 1 --batch_size 64 --num_workers 8
     ```
+#### 2.3.5 Evaluation
+- **Do Evaluation on kitti val dataset**
+```
+python  train.py --evaluate  --gpu_idx 0 --pretrained_path=../checkpoints/fpn_resnet_18/fpn_resnet_18_epoch_300.pth
+```
+- **Evaluation result**
+```
+Car AP(Average Precision)@0.70, 0.70, 0.70:
+bbox AP:96.57, 89.17, 89.41
+bev  AP:97.52, 89.62, 89.78
+3d   AP:88.09, 87.86, 88.09
+aos  AP:60.28, 55.63, 55.04
+Car AP(Average Precision)@0.70, 0.50, 0.50:
+bbox AP:96.57, 89.17, 89.41
+bev  AP:98.03, 89.94, 90.09
+3d   AP:98.01, 89.94, 90.09
+aos  AP:60.28, 55.63, 55.04
+Pedestrian AP(Average Precision)@0.50, 0.50, 0.50:
+bbox AP:65.38, 64.95, 63.96
+bev  AP:68.14, 69.36, 65.41
+3d   AP:66.44, 62.36, 62.77
+aos  AP:32.13, 30.95, 30.21
+Pedestrian AP(Average Precision)@0.50, 0.25, 0.25:
+bbox AP:65.38, 64.95, 63.96
+bev  AP:88.43, 88.61, 88.59
+3d   AP:88.29, 88.45, 88.48
+aos  AP:32.13, 30.95, 30.21
+Cyclist AP(Average Precision)@0.50, 0.50, 0.50:
+bbox AP:89.62, 87.64, 87.70
+bev  AP:82.11, 75.41, 75.64
+3d   AP:80.09, 74.31, 74.45
+aos  AP:54.37, 52.01, 51.44
+Cyclist AP(Average Precision)@0.50, 0.25, 0.25:
+bbox AP:89.62, 87.64, 87.70
+bev  AP:96.04, 88.67, 88.78
+3d   AP:96.04, 88.67, 88.78
+aos  AP:54.37, 52.01, 51.44
+```
+The original evaluation code is from [here](https://github.com/traveller59/kitti-object-eval-python).
 
 #### Tensorboard
 
