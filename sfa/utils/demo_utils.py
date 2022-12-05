@@ -56,7 +56,7 @@ def parse_demo_configs():
     parser.add_argument('--output-width', type=int, default=608,
                         help='the width of showing output, the height maybe vary')
 
-    configs = edict(vars(parser.parse_args()))
+    configs = edict(vars(parser.parse_known_args()[0]))
     configs.pin_memory = True
     configs.distributed = False  # For testing on 1 GPU only
 
