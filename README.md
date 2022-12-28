@@ -172,8 +172,6 @@ in Line 123: cuda device
 
 in Line 131-134: Topic names and message typ
 
-
-
 ## ROS Topics
 ### Subscriber
 Topic Name: ```points_raw```, Message Type: ```sensor_msgs/PointCloud2```
