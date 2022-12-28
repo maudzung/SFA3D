@@ -2,6 +2,7 @@
 
 [![python-image]][python-url]
 [![pytorch-image]][pytorch-url]
+![ubuntu-image]
 
 ---
 
@@ -252,3 +253,5 @@ ${ROOT}
 [python-url]: https://www.python.org/
 [pytorch-image]: https://img.shields.io/badge/PyTorch-1.5-2BAF2B.svg
 [pytorch-url]: https://pytorch.org/
+
+[ubuntu-image]: https://img.shields.io/static/v1?label=Ubuntu&message=20.04&color=orange
