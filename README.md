@@ -119,6 +119,51 @@ tensorboard --logdir=./
 
 - Then go to [http://localhost:6006/](http://localhost:6006/)
 
+## ROS Integration
+### Install dependancies for ROS packages:
+```
+sudo apt install ros-noetic-autoware-msgs
+```
+### Build Workspace
+```
+cd ros/
+catkin_make
+```
+
+## Run Inference Node
+```
+source devel/setup.bash
+rosrun super_fast_object_detection rosInference.py
+```
+## Run Detected Object Visualizer
+
+```
+# Terminal 1: Start ROS Master
+roscore
+
+# Terminal 2: Start Rviz
+rviz rviz
+
+# Terminal 3: Start Inference Node
+cd ros/
+source devel/setup.bash
+rosrun super_fast_object_detection rosInference.py
+
+# Terminal 4: Start Vizualisation Node
+cd ros/
+source devel/setup.bash
+roslaunch det
+ected_objects_visualizer detected_objects_vis.launch
+
+# Terminal 5: Play Rosbag or Live Inference
+rosbag play xxxx.bag
+```
+
+## ROS Topics
+### Subscriber
+Topic Name: ```points_raw```, Message Type: ```sensor_msgs/PointCloud2```
+### Publisher
+Topic Name: ```detected_objects```, Message Type: ```autoware_msgs/DetectedObjectArray```
 
 ## Contact
 
