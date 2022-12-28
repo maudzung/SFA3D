@@ -39,6 +39,7 @@ The instructions for setting up a virtual environment is [here](https://github.c
 git clone https://github.com/PanterSoft/SFA3D_ROS.git SFA3D_ROS
 cd SFA3D/
 pip install -r requirements.txt
+pip install .
 ```
 
 ### 2.2. Data Preparation
@@ -140,6 +141,7 @@ catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3
 ## Run Inference Node
 ```
 source devel/setup.bash
+chmod +x /src/super_fast_object_detection/src/rosInference.py
 rosrun super_fast_object_detection rosInference.py
 ```
 ## Run Detected Object Visualizer
@@ -159,8 +161,7 @@ rosrun super_fast_object_detection rosInference.py
 # Terminal 4: Start Vizualisation Node
 cd ros/
 source devel/setup.bash
-roslaunch det
-ected_objects_visualizer detected_objects_vis.launch
+roslaunch detected_objects_visualizer detected_objects_vis.launch
 
 # Terminal 5: Play Rosbag or Live Inference
 rosbag play xxxx.bag
