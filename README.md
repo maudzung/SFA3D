@@ -140,8 +140,8 @@ catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3
 
 ## Run Inference Node
 ```
-source devel/setup.bash
 chmod +x /src/super_fast_object_detection/src/rosInference.py
+source devel/setup.bash
 rosrun super_fast_object_detection rosInference.py
 ```
 ## Run Detected Object Visualizer
