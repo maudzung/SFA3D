@@ -162,7 +162,7 @@ rosbag play xxxx.bag
 
 ### Running on Custom Dataset
 
-for running on custom dataset with custom message names edit rosInference.py in ```ros/src/super_fast_object_detection```
+For running on custom dataset with custom messagenames edit ```rosInference.py``` in ```ros/src/super_fast_object_detection/```
 
 in Line 35-42: class names and the Id´s
 
