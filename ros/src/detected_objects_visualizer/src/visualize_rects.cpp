@@ -109,7 +109,7 @@ VisualizeRects::ObjectsToRects(cv::Mat in_image, const autoware_msgs::DetectedOb
                     rect,
                     cv::Scalar(244,134,66),
                     4,
-                    CV_AA);
+                    cv::Line_AA);
 
       //draw label
       std::string label = "";
@@ -135,8 +135,8 @@ VisualizeRects::ObjectsToRects(cv::Mat in_image, const autoware_msgs::DetectedOb
                     text_origin + cv::Point(0, baseline),
                     text_origin + cv::Point(text_size.width, -text_size.height),
                     cv::Scalar(0,0,0),
-                    CV_FILLED,
-                    CV_AA,
+                    cv::FILLED,
+                    cv::Line_AA,
                     0);
 
       cv::putText(final_image,
@@ -146,7 +146,7 @@ VisualizeRects::ObjectsToRects(cv::Mat in_image, const autoware_msgs::DetectedOb
                   font_scale,
                   cv::Scalar::all(255),
                   thickness,
-                  CV_AA,
+                  cv::Line_AA,
                   false);
 
     }

@@ -35,7 +35,8 @@ The implementation is [here](https://github.com/maudzung/SFA3D/tree/ea0222c1b354
 The instructions for setting up a virtual environment is [here](https://github.com/maudzung/virtual_environment_python3).
 
 ```shell script
-git clone https://github.com/maudzung/SFA3D.git SFA3D
+
+git clone https://github.com/PanterSoft/SFA3D_ROS.git SFA3D_ROS
 cd SFA3D/
 pip install -r requirements.txt
 ```
@@ -128,7 +129,12 @@ sudo apt install ros-noetic-autoware-msgs
 ### Build Workspace
 ```
 cd ros/
-catkin_make
+catkin_make 
+```
+
+for some users you have to specify which python you want to use in this case execute
+```
+catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3
 ```
 
 ## Run Inference Node
