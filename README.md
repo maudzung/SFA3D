@@ -160,6 +160,20 @@ ected_objects_visualizer detected_objects_vis.launch
 rosbag play xxxx.bag
 ```
 
+### Running on Custom Dataset
+
+for running on custom dataset with custom message names edit rosInference.py in ```ros/src/super_fast_object_detection```
+
+in Line 35-42: class names and the Id´s
+
+in Line 119: path to trained model
+
+in Line 123: cuda device
+
+in Line 131-134: Topic names and message typ
+
+
+
 ## ROS Topics
 ### Subscriber
 Topic Name: ```points_raw```, Message Type: ```sensor_msgs/PointCloud2```
