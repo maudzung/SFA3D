@@ -116,7 +116,7 @@ if __name__ == '__main__':
     rospack = rospkg.RosPack()
     package_path = rospack.get_path('super_fast_object_detection')
     configs = parse_demo_configs()
-    configs.pretrained_path = package_path + '/checkpoints/fpn_resnet_18/fpn_resnet_18_epoch_300.pth'
+    configs.pretrained_path = package_path + '../../../checkpoints/fpn_resnet_18/fpn_resnet_18_epoch_300.pth'
     model = create_model(configs)
     print('\n\n' + '-*=' * 30 + '\n\n')
     assert os.path.isfile(configs.pretrained_path), "No file at {}".format(configs.pretrained_path)
