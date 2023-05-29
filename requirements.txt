@@ -4,6 +4,7 @@ easydict==1.9
 opencv-python==4.2.0.34
 numpy==1.18.3
 torchsummary==1.5.1
+protobuf==3.19.6
 tensorboard==2.2.1
 scikit-learn==0.22.2
 wget==3.2
