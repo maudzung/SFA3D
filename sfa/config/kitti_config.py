@@ -5,15 +5,11 @@ import numpy as np
 # Car and Van ==> Car class
 # Pedestrian and Person_Sitting ==> Pedestrian Class
 CLASS_NAME_TO_ID = {
-    'Pedestrian': 0,
-    'Car': 1,
-    'Cyclist': 2,
-    'Van': 1,
-    'Truck': -3,
-    'Person_sitting': 0,
-    'Tram': -99,
-    'Misc': -99,
-    'DontCare': -1
+    'yellow_cone': 0,
+    'blue_cone': 1,
+    'orange_cone': 2,
+    'large_orange_cone': 1,
+    'unknown_cone': -3,
 }
 
 colors = [[0, 255, 255], [0, 0, 255], [255, 0, 0], [255, 120, 0],
