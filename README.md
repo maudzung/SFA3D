@@ -2,6 +2,7 @@
 
 [![python-image]][python-url]
 [![pytorch-image]][pytorch-url]
+![ubuntu-image]
 
 ---
 
@@ -34,9 +35,11 @@ The implementation is [here](https://github.com/maudzung/SFA3D/tree/ea0222c1b354
 The instructions for setting up a virtual environment is [here](https://github.com/maudzung/virtual_environment_python3).
 
 ```shell script
-git clone https://github.com/maudzung/SFA3D.git SFA3D
+
+git clone https://github.com/PanterSoft/SFA3D_ROS.git SFA3D_ROS
 cd SFA3D/
 pip install -r requirements.txt
+pip install .
 ```
 
 ### 2.2. Data Preparation
@@ -119,6 +122,68 @@ tensorboard --logdir=./
 
 - Then go to [http://localhost:6006/](http://localhost:6006/)
 
+## ROS Integration
+### Install dependancies for ROS packages:
+```
+sudo apt install ros-noetic-autoware-msgs
+```
+### Build Workspace
+```
+cd ros/
+catkin_make 
+```
+
+for some users you have to specify which python you want to use in this case execute
+```
+catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3
+```
+
+## Run Inference Node
+```
+chmod +x /src/super_fast_object_detection/src/rosInference.py
+source devel/setup.bash
+rosrun super_fast_object_detection rosInference.py
+```
+## Run Detected Object Visualizer
+
+```
+# Terminal 1: Start ROS Master
+roscore
+
+# Terminal 2: Start Rviz
+rviz rviz
+
+# Terminal 3: Start Inference Node
+cd ros/
+source devel/setup.bash
+rosrun super_fast_object_detection rosInference.py
+
+# Terminal 4: Start Vizualisation Node
+cd ros/
+source devel/setup.bash
+roslaunch detected_objects_visualizer detected_objects_vis.launch
+
+# Terminal 5: Play Rosbag or Live Inference
+rosbag play xxxx.bag
+```
+
+### Running on Custom Dataset
+
+For running on custom dataset with custom messagenames edit ```rosInference.py``` in ```ros/src/super_fast_object_detection/```
+
+in Line 35-42: class names and the Id´s
+
+in Line 119: path to trained model
+
+in Line 123: cuda device
+
+in Line 131-134: Topic names and message typ
+
+## ROS Topics
+### Subscriber
+Topic Name: ```points_raw```, Message Type: ```sensor_msgs/PointCloud2```
+### Publisher
+Topic Name: ```detected_objects```, Message Type: ```autoware_msgs/DetectedObjectArray```
 
 ## Contact
 
@@ -207,3 +272,5 @@ ${ROOT}
 [python-url]: https://www.python.org/
 [pytorch-image]: https://img.shields.io/badge/PyTorch-1.5-2BAF2B.svg
 [pytorch-url]: https://pytorch.org/
+
+[ubuntu-image]: https://img.shields.io/static/v1?label=Ubuntu&message=20.04&color=orange

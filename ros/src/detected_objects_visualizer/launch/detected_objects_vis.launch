@@ -1,0 +1,7 @@
+<launch>
+    <node pkg="detected_objects_visualizer" type="visualize_detected_objects" name="cluster_detect_visualization_01" output="screen">
+      <param name="objects_src_topic" value="detected_objects"/>
+    </node>
+
+
+</launch>
