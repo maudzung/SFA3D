@@ -1,17 +1,6 @@
 # ROS Package for Super Fast Accurate 3D object detection
 
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)  
-Ubuntu 18.04 & ROS Melodic
-
-## Installation
-
-Clone and setup the main python package
-```
-git clone https://github.com/maudzung/Super-Fast-Accurate-3D-Object-Detection
-cd Super-Fast-Accurate-3D-Object-Detection/
-pip install .
-```
 Install dependancies for ROS packages:
 ```
 sudo apt install ros-melodic-autoware-msgs
@@ -19,7 +8,7 @@ sudo apt install ros-melodic-autoware-msgs
 ## Building Workspace
 ```
 cd Super-Fast-Accurate-3D-Object-Detection/ros/
-catkin_make
+catkin_make -DCMAKE_BUILD_TYPE=Release
 ```
 
 ## Running the node
@@ -28,6 +17,8 @@ Run the node by simply after you build the workspace
 source devel/setup.bash
 rosrun super_fast_object_detection rosInference.py
 ```
+
+Note: If you want to visualize that detected objects, you can use detected_objects_visualizer package.
 
 ### Subscriber
 Topic Name: ```points_raw```, Message Type: ```sensor_msgs/PointCloud2```
