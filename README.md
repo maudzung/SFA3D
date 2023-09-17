@@ -18,8 +18,7 @@
 - [x] The great introduction and explanation from _`Computer Vision and Perception for Self-Driving Cars Course`_ **[Youtube link](https://youtu.be/cPOtULagNnI?t=4858)**
 - [x] SFA3D is used for the second course in the _`Udacity Self-Driving Car Engineer Nanodegree Program: Sensor Fusion and Tracking`_ **[GitHub link](https://github.com/udacity/nd013-c2-fusion-starter/tree/b1455b8ff433cb7f537d62e526209738293e7d8b)**
 
-**Update 2020.09.06**: Add `ROS` source code. The great work has been done by [@AhmedARadwan](https://github.com/AhmedARadwan). 
-The implementation is [here](https://github.com/maudzung/SFA3D/tree/ea0222c1b35489dc35d8452c989c4b014e20e0da)
+
 
 ## Demonstration (on a single GTX 1080Ti)
 
@@ -34,7 +33,7 @@ The implementation is [here](https://github.com/maudzung/SFA3D/tree/ea0222c1b354
 The instructions for setting up a virtual environment is [here](https://github.com/maudzung/virtual_environment_python3).
 
 ```shell script
-git clone https://github.com/maudzung/SFA3D.git SFA3D
+git clone https://github.com/maudzung/SFA3D.git --recursive
 cd SFA3D/
 pip install -r requirements.txt
 ```
@@ -119,6 +118,14 @@ tensorboard --logdir=./
 
 - Then go to [http://localhost:6006/](http://localhost:6006/)
 
+## ROS
+
+You can go to the ros directory for necessary instructions and more information.
+
+**Noetic-Support**:
+
+**Update 2020.09.06**: Add `ROS` source code. The great work has been done by [@AhmedARadwan](https://github.com/AhmedARadwan). 
+The implementation is [here](https://github.com/maudzung/SFA3D/tree/ea0222c1b35489dc35d8452c989c4b014e20e0da)
 
 ## Contact
 
