@@ -19,11 +19,12 @@ import cv2
 import torch
 
 src_dir = os.path.dirname(os.path.realpath(__file__))
+print("src_dir: ", src_dir)
 while not src_dir.endswith("sfa"):
     src_dir = os.path.dirname(src_dir)
 if src_dir not in sys.path:
     sys.path.append(src_dir)
-
+print("src_dir: ", src_dir)
 from data_process.kitti_data_utils import gen_hm_radius, compute_radius, Calibration, get_filtered_lidar
 from data_process.kitti_bev_utils import makeBEVMap, drawRotatedBox, get_corners
 from data_process import transformation
@@ -33,6 +34,7 @@ import config.kitti_config as cnf
 class KittiDataset(Dataset):
     def __init__(self, configs, mode='train', lidar_aug=None, hflip_prob=None, num_samples=None):
         self.dataset_dir = configs.dataset_dir
+        print("dataset_dir: ", self.dataset_dir)
         self.input_size = configs.input_size
         self.hm_size = configs.hm_size
 
@@ -286,7 +288,7 @@ if __name__ == '__main__':
     configs.num_classes = 3
     configs.output_width = 608
 
-    configs.dataset_dir = os.path.join('../../', 'dataset', 'kitti')
+    configs.dataset_dir = os.path.join('/home/star/autoware/src/super_fast_object_detection/', 'dataset', 'kitti')
     # lidar_aug = OneOf([
     #     Random_Rotation(limit_angle=np.pi / 4, p=1.),
     #     Random_Scaling(scaling_range=(0.95, 1.05), p=1.),
